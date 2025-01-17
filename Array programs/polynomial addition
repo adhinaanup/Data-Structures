@@ -1,0 +1,105 @@
+#include<stdio.h>
+#include <math.h>
+struct poly
+{
+    int coeff,expo;
+};
+void read(struct poly p1[50],int n)
+{
+     for(int i=0;i<n;i++)
+    {
+        printf("\n");
+        printf("Enter the coefficent : ");
+        scanf("%d",&p1[i].coeff);
+        printf("Enter the exponent : ");
+        scanf("%d",&p1[i].expo);
+    }
+}
+void display(struct poly p[50],int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        printf("%dx%d  ",p[i].coeff,p[i].expo);
+        if(i<n-1)
+        {
+            printf("+");
+        }
+    }
+}
+void add(struct poly p1[50],struct poly p2[50],struct poly p3[50],int n,int m)
+{
+    int i=0,j=0,k=0;
+    while(i<n && j<m)
+    {
+        if(p1[i].expo==p2[j].expo)
+        {
+            p3[k].coeff=p1[i].coeff+p2[j].coeff;
+            p3[k].expo=p1[i].expo;
+            k++;j++;i++;
+        }
+        else if(p1[i].expo>p2[j].expo)
+        {
+            p3[k].coeff=p1[i].coeff;
+            p3[k].expo=p1[i].expo;
+            k++;i++;
+        }
+        else
+        {
+            p3[k].coeff=p2[j].coeff;
+            p3[k].expo=p2[j].expo;
+            k++;j++;
+        }  
+    }
+    while (i < n) {
+        p3[k].coeff = p1[i].coeff;
+        p3[k].expo = p1[i].expo;
+        k++;
+        i++;
+    }
+    while (j < m) {
+        p3[k].coeff = p2[j].coeff;
+        p3[k].expo = p2[j].expo;
+        k++;
+        j++;
+    }
+    printf("\n\nSum of polynomials : ");
+    for(i=0;i<k;i++)
+    {
+        printf("%dx^(%d)  ",p3[i].coeff,p3[i].expo);
+        if(i<k-1)
+        {
+            printf("+");
+        }
+    }
+    int x;
+    double t,sum=0;
+    printf("\n\nEnter the value of x : ");
+    scanf("%d",&x);
+    for(i=0;i<k;i++)
+    {
+        t=(pow(x,p3[i].expo))*p3[i].coeff;
+        sum=sum+t;
+        
+    }
+     printf("%f",sum);
+}
+void main()
+{
+    struct poly p1[50],p2[50],p3[50];
+    int n,i,m;
+    printf("Enter the no of terms of polynomial 1: ");
+    scanf("%d",&n);
+    printf("\nEnter terms of polynomial 1 :\n");
+    read(p1,n);
+    printf("\nEnter the no of terms of polynomial 2: ");
+    scanf("%d",&m);
+    printf("\nEnter terms of polynomial 2 :\n");
+    read(p2,m);
+    printf("\n\nFirst polynomial : ");
+    display(p1,n);
+    printf("\n\nSecond polynomial : ");
+    display(p2,m);
+    add(p1,p2,p3,n,m);
+    
+}
+
