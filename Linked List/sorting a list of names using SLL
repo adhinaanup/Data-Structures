@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+#include<string.h>
+struct node
+{
+    char data[50];
+    struct node* next;
+};
+struct node *head,*newnode,*temp,*ptr;
+
+void main()
+{
+    int n,i;
+    printf("Enter the no of words : ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the data : ");
+        scanf("%s",newnode->data);
+        if(head==NULL)
+        {
+            head=newnode;
+            temp=newnode;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+    }
+    printf("\nBefore Sorting\n");
+    temp=head;
+    while(temp!=NULL)
+    {
+        printf("%s  ",temp->data);
+        temp=temp->next;
+    }
+    printf("\nAfter Sorting\n");
+    char s[30];
+    temp=head;
+    while(temp!=NULL)
+    {
+        ptr=temp->next;
+        while(ptr!=NULL)
+        {
+            if(strcmp(temp->data,ptr->data)>0)
+            {
+                strcpy(s,temp->data);
+                strcpy(temp->data,ptr->data);
+                strcpy(ptr->data,s);
+            }
+            ptr=ptr->next;
+        }
+        temp=temp->next;
+    }
+    printf("\n");
+    temp=head;
+    while(temp!=NULL)
+    {
+        printf("%s  ",temp->data);
+        temp=temp->next;
+    }
+}
