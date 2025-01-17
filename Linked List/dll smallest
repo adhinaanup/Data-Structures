@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+struct node *head,*tail,*newnode,*ptr;
+void main()
+{
+    int i,n,m;
+    head=NULL;
+    printf("Enter the no of nodes : ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the data : ");
+        scanf("%d",&newnode->data);
+        newnode->prev=NULL;
+        newnode->next=NULL;
+        if(head==NULL)
+        {
+            head=newnode;
+            tail=newnode;
+        }
+        else
+        {
+            tail->next=newnode;
+            newnode->prev=tail;
+            tail=newnode;
+        }
+    }
+    struct node *temp,*smallest;
+    
+    ptr=head;
+    temp=head;
+    smallest=head;
+    
+   int j;
+    while(temp!=NULL)
+    {
+       // p=p->next;
+        if((temp->data)<(smallest->data))
+        {
+            smallest=temp;
+             //printf("\nSmallest element is %d ",j);
+            //p=p->next;
+        }
+        temp=temp->next;
+    }
+    if(smallest->prev!=NULL)
+    {
+        smallest->prev->next=smallest->next;
+        smallest->next->prev=smallest->prev;
+        
+    }
+    else
+    {
+        head=smallest->next;
+    }
+    if(smallest->next!=NULL)
+    {
+        smallest->next->prev=smallest->prev;
+    }
+   printf("Smallest element is %d ",smallest->data);
+   // ptr->data=j;
+    free(smallest);
+    ptr=head;
+    printf("\n");
+    while(ptr!=NULL)
+        {
+            printf("%d\t",ptr->data);
+            ptr=ptr->next;
+        }
+    
+}
+
+
