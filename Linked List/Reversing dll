@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+struct node
+{
+    int data;
+    struct node* next;
+    struct node* prev;
+};
+struct node *newnode,*temp,*tail,*head,*ptr;
+void main()
+{
+    int n;
+    printf("Enter the no of nodes : ");
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the node %d : ",i+1);
+        scanf("%d",&newnode->data);
+        if(head==NULL)
+        {
+            head=newnode;
+            tail=newnode;
+        }
+        else
+        {
+            tail->next=newnode;
+            newnode->prev=tail;
+            tail=newnode;
+            ptr=tail;
+        }
+    }
+    printf("\nList : \n");
+    temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->next;
+    }
+    printf("\nReversing : \n");
+    temp=tail;
+    while(temp!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->prev;
+    }
+    //printf("%d",temp->data);
+    ptr=tail;
+   // printf("\n%d\n",ptr->data);
+    temp=head;
+    // printf("\n%d\n",temp->data);
+    bool flag=true;
+    while(ptr!=NULL&&temp!=NULL)
+    {
+        if(ptr->data!=temp->data)
+        {
+            flag=false;
+            break;
+        }
+        else
+        {
+            flag=true;
+            ptr=ptr->prev;
+            temp=temp->next;
+        }
+    }
+    if(flag==true)
+    {
+        printf("\nPalindrome");
+    }
+    else
+    {
+        printf("\nNot a Palindrome");
+    }
+    
+}
+
