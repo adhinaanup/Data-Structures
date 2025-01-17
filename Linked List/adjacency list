@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int vertex;
+    struct node* next;
+};
+struct AdjList
+{
+    struct node* head;
+};
+struct AdjList adjlist[10];
+void intialise(int vertices)
+{
+    for(int i=0;i<vertices;i++)
+    {
+        adjlist[i].head=NULL;
+    }
+}
+void add(int from,int to)
+{
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->vertex=to;
+    newnode->next=adjlist[from].head;
+    adjlist[from].head=newnode;
+}
+void display(int vertices)
+{
+    printf("_____ADJACENCY LIST____\n");
+    for(int i=0;i<vertices;i++)
+    {
+        printf("vertex is %d -> ",i);
+        struct node* current=adjlist[i].head;
+        while(current!=NULL)
+        {
+            printf("%d",current->vertex);
+            current=current->next;
+        }
+        printf("\n");
+    }
+}
+void main()
+{
+    int vertices,edges,to,from;
+    printf("Enter the no of vertices : ");
+    scanf("%d",&vertices);
+    intialise(vertices);
+    printf("Enter the no of edges : ");
+    scanf("%d",&edges);
+    for(int i=0;i<edges;i++)
+    {
+        scanf("%d  %d",&from,&to);
+        add(from,to);
+    }
+    display(vertices);
+}
