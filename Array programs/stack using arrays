@@ -1,0 +1,63 @@
+#include<stdio.h>
+#define max 50
+int stack[max];
+int top=-1;
+void push(int element)
+{
+    if(top==max-1)
+        printf("Stack is full");
+    else
+    {
+         top++;
+        stack[top]=element;
+       
+    }
+}
+int pop()
+{
+    if(top==-1)
+    {
+            printf("Stack is empty");
+    }
+    else
+    {
+       
+        int element=stack[top];
+         top--;
+        return element;
+    }
+}
+int peek()
+{
+    if(top==-1)
+    {
+        printf("Stack is empty");
+    }
+    else
+    {
+        return stack[top];
+    }
+}
+void display()
+{
+    if(top==-1)
+        printf("Stack is empty");
+    else
+    {
+        int i=top;
+        while(i>=0)
+        {
+            printf("%d  \n",stack[i--]);
+            
+        }
+    }
+}
+void main()
+{
+    push(30);
+    push(40);
+    display();
+    int item=peek();
+    printf("Topest element :%d",item);
+}
+
