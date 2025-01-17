@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_SIZE 100
+
+char stack[MAX_SIZE];
+int top = -1;
+
+void push(char item) {
+    if (top >= MAX_SIZE - 1) {
+        printf("Stack Overflow\n");
+        return;
+    }
+    top++;
+    stack[top] = item;
+}
+
+char pop() {
+    if (top == -1) {
+        printf("Stack Underflow\n");
+        return -1;
+    }
+    return stack[top--];
+}
+
+bool isBalanced(char expr[]) {
+    int i = 0;
+
+    while (expr[i] != '\0') {
+        if (expr[i] == '(') {
+            push(expr[i]);
+        } else if (expr[i] == ')') {
+            if (top == -1 || pop() != '(') {
+                return false; // Mismatched or extra closing parentheses
+            }//pop();
+        }
+        i++;
+    }
+
+    return (top == -1); // Check if the stack is empty (all opening parentheses are matched)
+}
+
+int main() {
+    char expr[MAX_SIZE];
+
+    printf("Enter an expression with parentheses: ");
+    scanf("%s", expr);
+
+    if (isBalanced(expr)) {
+        printf("Expression has balanced parentheses.\n");
+    } else {
+        printf("Expression does not have balanced parentheses.\n");
+    }
+
+    return 0;
+}
+
