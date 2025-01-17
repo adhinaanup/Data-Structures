@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<string.h>
+#define MAX 50
+char arr[MAX];
+char rev[MAX];
+char str[MAX];
+int top=-1,top1=-1;
+int flag=0;
+void push(char c)
+{
+    top++;
+    if(top==MAX-1)
+    {
+        printf("Stack is full");
+        return;
+    }
+    arr[top]=c;
+}
+void push1(char r)
+{
+    top1++;
+    if(top1==MAX-1)
+    {
+        printf("Stack is full");
+        return;
+    }
+    rev[top1]=r;
+}
+char pop()
+{
+    return arr[top--];
+}
+char pop1()
+{
+    return rev[top1--];
+}
+void isPalin(int m)
+{
+    for(int i=0;i<m;i++)
+    {
+        char e=pop();
+        char f=pop1();
+        if(e==f)
+            flag=1;
+        else
+        {
+            flag=0;
+            break;
+        }
+    }
+    if(flag==1)
+        printf("Palindrome");
+    else
+        printf("Not a Palindrome");
+}
+void main()
+{
+    printf("Enter the string : ");
+    scanf("%s",str);
+    int n=strlen(str);
+    for(int i=0;i<n;i++)
+        push(str[i]);
+    for(int i=n-1;i>=0;i--)
+        push1(str[i]);
+    isPalin(n);
+}
