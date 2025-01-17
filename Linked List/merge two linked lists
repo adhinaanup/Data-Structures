@@ -1,0 +1,101 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+};
+struct node *temp1,*temp2,*head1,*head2,*newnode1,*newnode2,*ptr,*ptr1;
+void main()
+{
+    int n1,n2,i;
+    printf("Enter the no nodes of 1st linked list : ");
+    scanf("%d",&n1);
+    for(i=0;i<n1;i++)
+    {
+        newnode1=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the data of node %d : ",i+1);
+        scanf("%d",&newnode1->data);
+        if(head1==NULL)
+        {
+            head1=newnode1;
+            temp1=newnode1;
+        }
+        else
+        {
+            temp1->next=newnode1;
+            temp1=newnode1;
+        }
+    }
+    printf("\n1st linked list: \n");
+    temp1=head1;
+    while(temp1!=NULL)
+    {
+        printf("%d  ",temp1->data);
+        temp1=temp1->next;
+    }
+    printf("\nEnter the no nodes of 2nd linked list : ");
+    scanf("%d",&n2);
+    for(i=0;i<n2;i++)
+    {
+        newnode2=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the data of node %d : ",i+1);
+        scanf("%d",&newnode2->data);
+        if(head2==NULL)
+        {
+            head2=newnode2;
+            temp2=newnode2;
+        }
+        else
+        {
+            temp2->next=newnode2;
+            temp2=newnode2;
+        }
+    }
+    printf("\n2nd linked list: \n");
+    temp2=head2;
+    while(temp2!=NULL)
+    {
+        printf("%d  ",temp2->data);
+        temp2=temp2->next;
+    }
+    ptr=head1;
+    while(ptr->next!=NULL)
+    {
+        ptr=ptr->next;
+    }
+    //printf("\n%d",ptr->data);
+    temp2=head2;
+    ptr->next=temp2;
+     printf("\nMerged linked list: \n");
+    temp1=head1;
+    while(temp1!=NULL)
+    {
+        printf("%d  ",temp1->data);
+        temp1=temp1->next;
+    }
+    int key;
+    ptr=head1;
+    while(ptr!=NULL)
+    {
+        ptr1=ptr->next;
+        while(ptr1!=NULL)
+        {
+            if(ptr->data > ptr1->data)
+            {
+                key=ptr->data;
+                ptr->data=ptr1->data;
+                ptr1->data=key;
+            }
+            ptr1=ptr1->next;
+        }
+        ptr=ptr->next;
+    }
+     printf("\nSorted linked list: \n");
+    temp1=head1;
+    while(temp1!=NULL)
+    {
+        printf("%d  ",temp1->data);
+        temp1=temp1->next;
+    }
+}
