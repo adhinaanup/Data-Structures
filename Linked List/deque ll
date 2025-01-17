@@ -1,0 +1,110 @@
+#include<stdio.h>
+#include<stdlib.h>
+//int front=-1,rear=-1;
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *front,*newnode,*rear,*temp;
+void insertrear(int x)
+{
+    newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=x;
+    newnode->next=NULL;
+    if(rear==NULL)
+    {
+        front=newnode;
+        rear=newnode;
+    }
+    else
+    {
+        rear->next=newnode;
+        rear=newnode;
+    }
+}
+void insertfront(int x)
+{
+    newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=x;
+    newnode->next=NULL;
+    if(front==NULL)
+    {
+        front=newnode;
+        rear=newnode;
+    }
+    else
+    {
+        newnode->next=front;
+        front=newnode;
+    }
+}
+void deletefront()
+{
+    temp=front;
+    front=front->next;
+    free(temp);
+}
+void deleterear()
+{
+    struct node *prev;
+    temp=front;
+    while(temp->next!=NULL)
+    {
+        prev=temp;
+        temp=temp->next;
+    }
+    if(temp==front)
+    {
+        front=NULL;
+        free(temp);
+    }
+    else
+    {
+        prev->next=NULL;
+        free(temp);
+    }
+}
+void display()
+{
+    temp=front;
+    while(temp!=NULL)
+    {
+        printf("%d  ",temp->data);
+        temp=temp->next;
+    }
+}
+void main()
+{
+    int i,n;
+    front=NULL;
+    printf("Enter the no of nodes : ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the data : ");
+        scanf("%d",&newnode->data);
+        if(front==NULL)
+        {
+           front=newnode;
+           rear=newnode;
+        }
+        else
+        {
+            rear->next=newnode;
+            rear=newnode;
+        }
+    }
+    display();
+    printf("\n");
+    /*insertfront(34);
+    display();
+    printf("\n");
+    deleterear();
+    display();
+    printf("\n");*/
+    insertrear(34);
+    display();
+    printf("\n");
+}
