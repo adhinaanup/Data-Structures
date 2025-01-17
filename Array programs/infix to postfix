@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<ctype.h>
+#define max 100
+char stack[max],infix[50],post[50];
+int top=-1;
+void push(char a)
+{
+    if(top==max-1)
+    {
+        printf("Stack overflow");
+        return;
+    }
+    stack[++top]=a;
+}
+char pop()
+{
+    if(top==-1)
+    {
+        printf("Stack underflow");
+        return -1;
+    }
+    return stack[top--];
+}
+int precedence(char ch)
+{
+    if(ch=='+'||ch=='-')
+        return 1;
+    else if(ch=='*'||ch=='/')
+        return 2;
+    else if(ch=='^')
+        return 3;
+    else
+        return -1;
+}
+void infixcon(char infix[50])
+{
+    int i=0,j=0;
+    char post[50];
+    while(infix[i]!='\0')
+    {
+        char symbol=infix[i];
+        if(isalnum(symbol))
+        {
+            post[j++]=symbol;
+        }
+        else if(symbol=='(')
+        {
+            push(symbol);
+        }
+        else if(symbol==')')
+        {
+            while(top!=-1 && stack[top]!='(')
+            {
+                post[j++]=pop();
+            }
+            pop();
+        }
+        else
+        {
+            while(top!=-1 && precedence(symbol)<=precedence(stack[top]))
+            {
+                post[j++]=pop();
+            }
+            push(symbol);
+        }
+       i++; 
+    }
+    while(top!=-1)
+    {
+        post[j++]=pop();
+    }
+    post[j]='\0';
+    printf("POstfix : %s",post);
+}
+int main()
+{
+    printf("Enter the expression : ");
+    scanf("%s",infix);
+    infixcon(infix);
+}
