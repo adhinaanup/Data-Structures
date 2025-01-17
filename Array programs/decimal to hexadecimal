@@ -1,0 +1,25 @@
+#include<stdio.h>
+void main()
+{
+    int i,j,num,rem,temp;
+    char hex[50];
+    printf("Enter the variable : ");
+    scanf("%d",&num);
+    temp=num;
+    i=1;
+    while(temp!=0)
+    {
+        rem=temp%16;
+        if(rem<10)
+            rem=rem+48;
+        else
+            rem=rem+55;
+        hex[i]=rem;
+        i++;
+        temp=temp/16;
+    }
+    for(j=i-1;j>0;j--)
+    {
+        printf("%c",hex[j]);
+    }
+}
