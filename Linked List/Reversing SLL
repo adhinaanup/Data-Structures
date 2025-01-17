@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+};
+struct node *head,*newnode,*temp,*current,*prev;
+void reverse()
+{
+    
+}
+void main()
+{
+    int n,i;
+    printf("Enter the no of nodes : ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the data of the node %d :",i+1);
+        scanf("%d",&newnode->data);
+        if(head==NULL)
+        {
+            head=newnode;
+            temp=newnode;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+    }
+    printf("\nBefore Reversing :\n");
+    temp=head;
+   while(temp!=NULL)
+   {
+       printf("%d  ",temp->data);
+       temp=temp->next;
+   }
+   prev=NULL;
+   temp=head;
+   current=head;
+   while(temp!=NULL)
+   {
+       temp=temp->next;
+       current->next=prev;
+       prev=current;
+       current=temp;
+   }
+   head=prev;
+   printf("\nAfter Reversing :\n");
+   temp=head;
+   while(temp!=NULL)
+   {
+       printf("%d  ",temp->data);
+       temp=temp->next;
+   }
+}
