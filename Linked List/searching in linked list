@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+  int data;
+  struct node *next;
+};
+struct node *head,*newnode,*temp;
+int main()
+{
+    int n,i,count=0;
+    head=NULL;
+    printf("Enter the no of nodes : ");
+    scanf("%d",&n);
+    
+    for(i=0;i<n;i++)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("\nEnter the data : ");
+        scanf("%d",&newnode->data);
+        if(head==NULL)
+        {
+            head=newnode;
+            temp=newnode;
+        }
+        else
+        {
+            newnode->next=NULL;
+            temp->next=newnode;
+            temp=newnode;
+        }
+    }
+    temp=head;
+    while(temp!=0)
+    {
+        printf("%d   ",temp->data);
+        temp=temp->next;
+        count++;
+    }
+    printf("\nNo of nodes is  %d",count);
+    
+    int key,loc=-1;
+    
+    printf("\nEnter the element to be searched : ");
+    scanf("%d",&key);
+    temp=head;
+    for(int i=0;i<n;i++)
+    {
+        if(temp->data==key)
+        {
+            loc=i;
+            break;
+        }
+        else
+        {
+            temp=temp->next;
+        }
+    }
+    if(loc!=-1)
+        printf("Element is found at position %d ",loc+1);
+    else
+        printf("Not found in the list ");
+    
+    return 0;
+}
